@@ -69,14 +69,34 @@ def remove_customer_cash(custmomer, amount)
 end
 
 def customer_pet_count(customer)
-    customer_pet_list = 0
-    for pets in customer
-        customer_pet_list += customer[:pets].count
-    end
-
-    return customer_pet_list
+    customer[:pets].count
 end
 
-def add_pet_to_customer(customer, new_pet)
-    customer[:pets].push(new_pet)
+# def customer_pet_count(customer) #daves answer
+#     customer_pet_list = 0 # Set counter to 0
+#     for pets in customer #for every pet the customer has
+#         customer_pet_list += customer[:pets].count #Add to the count
+#     end
+
+#     return customer_pet_list #return the count
+# end
+
+def add_pet_to_customer(customer, pet)
+    customer[:pets].push(pet)
+end
+
+def customer_can_afford_pet(customer,new_pet_to_buy)
+    if customer == nil 
+        return false
+        
+    elsif customer[:cash] >= new_pet_to_buy[:price]
+        
+        return true
+    else
+        return false
+    end
+end
+
+def sell_pet_to_customer(pet_shop, pet, customer)
+    
 end
