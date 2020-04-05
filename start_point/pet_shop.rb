@@ -72,7 +72,7 @@ def customer_pet_count(customer)
     customer[:pets].count
 end
 
-# def customer_pet_count(customer) #daves answer
+# def customer_pet_count(customer) #dave's wrong answer
 #     customer_pet_list = 0 # Set counter to 0
 #     for pets in customer #for every pet the customer has
 #         customer_pet_list += customer[:pets].count #Add to the count
@@ -98,5 +98,24 @@ def customer_can_afford_pet(customer,new_pet_to_buy)
 end
 
 def sell_pet_to_customer(pet_shop, pet, customer)
+    #check status before purchase
+    customer_pet_count_presale = customer_pet_count(customer)
+    p "Customer has: #{customer_pet_count_presale} pets"
+    successful_sale = false
+    #check if customer can afford pet
+    if customer_can_afford_pet(customer,pet)
+        successful_sale = true
+    else
+        successful_sale = false
+    end
+
+    #check pet was added to customers pet list
     
+    if customer_pet_count(customer)
+    end
+
+
+
+
+    return successful_sale
 end

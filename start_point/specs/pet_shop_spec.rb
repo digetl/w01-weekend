@@ -80,72 +80,71 @@ class TestPetShop < Minitest::Test
     }
   end
 
-  def test_pet_shop_name
+  def test_pet_shop_name #1
     name = pet_shop_name(@pet_shop)
     assert_equal("Camelot of Pets", name)
   end
 
-  def test_total_cash
+  def test_total_cash #2
     sum = total_cash(@pet_shop)
     assert_equal(1000, sum)
   end
 
-  def test_add_or_remove_cash__add
+  def test_add_or_remove_cash__add #3
     add_or_remove_cash(@pet_shop,10)
     cash = total_cash(@pet_shop)
     assert_equal(1010, cash)
   end
 
-  def test_add_or_remove_cash__remove
+  def test_add_or_remove_cash__remove #4
     add_or_remove_cash(@pet_shop,-10)
     cash = total_cash(@pet_shop)
     assert_equal(990, cash)
   end
 
-  def test_pets_sold
+  def test_pets_sold #5
     sold = pets_sold(@pet_shop)
     assert_equal(0, sold)
   end
 
-  def test_increase_pets_sold
+  def test_increase_pets_sold #6
     increase_pets_sold(@pet_shop,2)
     sold = pets_sold(@pet_shop)
     assert_equal(2, sold)
   end
 
-  def test_stock_count
+  def test_stock_count #7
     count = stock_count(@pet_shop)
     assert_equal(6, count)
   end
 
-  def test_all_pets_by_breed__found
+  def test_all_pets_by_breed__found #8
     pets = pets_by_breed(@pet_shop, "British Shorthair")
     assert_equal(2, pets.count)
   end
 
-  def test_all_pets_by_breed__not_found
+  def test_all_pets_by_breed__not_found #9
     pets = pets_by_breed(@pet_shop, "Dalmation")
     assert_equal(0, pets.count)
   end
 
-  def test_find_pet_by_name__returns_pet
+  def test_find_pet_by_name__returns_pet #10
     pet = find_pet_by_name(@pet_shop, "Arthur")
-
     assert_equal("Arthur", pet[:name])
   end
 
-  def test_find_pet_by_name__returns_nil
+  def test_find_pet_by_name__returns_nil #11
     pet = find_pet_by_name(@pet_shop, "Fred")
     assert_nil(pet)
   end
 
-  def test_remove_pet_by_name
+  def test_remove_pet_by_name #12
     remove_pet_by_name(@pet_shop, "Arthur")
     pet = find_pet_by_name(@pet_shop,"Arthur")
     assert_nil(pet)
   end
 
-  def test_add_pet_to_stock
+  def test_add_pet_to_stock #13
     add_pet_to_stock(@pet_shop, @new_pet)
     count = stock_count(@pet_shop)
     assert_equal(7, count)
