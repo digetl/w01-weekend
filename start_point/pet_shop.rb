@@ -142,6 +142,12 @@ def sell_pet_to_customer(pet_shop, pet, customer)
      if successful_sale == true
         pets_sold = 1
         increase_pets_sold(pet_shop, pets_sold)
+
+        amount_to_take = pet[:price]
+        remove_customer_cash(customer, amount_to_take)
+        add_or_remove_cash(pet_shop, pet[:price])
+
+
         return successful_sale = true
         else
             return successful_sale = false
@@ -170,23 +176,23 @@ def sell_pet_to_customer(pet_shop, pet, customer)
 
    
 
-    #take_cash
-    if successful_sale == true
-        amount_to_take = pet[:price]
-    remove_customer_cash(customer, amount_to_take)
-    else 
-        return successful_sale = false
-    end
+    # #take_cash
+    # if successful_sale == true
+    #     amount_to_take = pet[:price]
+    # remove_customer_cash(customer, amount_to_take)
+    # else 
+    #     return successful_sale = false
+    # end
     
-    if successful_sale == true
-    remove_customer_cash(customer, pet[:price])
-    p "pet[:price]) #{pet[:price]}"
-    else
-        return successful_sale = false
-    end
+    # if successful_sale == true
+    # remove_customer_cash(customer, pet[:price])
+    # p "pet[:price]) #{pet[:price]}"
+    # else
+    #     return successful_sale = false
+    # end
 
     #add to cash register
-    add_or_remove_cash(pet_shop, pet[:price])
+    # add_or_remove_cash(pet_shop, pet[:price])
         
 
 
