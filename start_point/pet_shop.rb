@@ -147,6 +147,8 @@ def sell_pet_to_customer(pet_shop, pet, customer)
         remove_customer_cash(customer, amount_to_take)
         add_or_remove_cash(pet_shop, pet[:price])
 
+        #remove pet from pet shop
+        remove_pet_by_name(pet_shop, pet)
 
         return successful_sale = true
         else
@@ -171,32 +173,7 @@ def sell_pet_to_customer(pet_shop, pet, customer)
         successful_sale = true
     end
 
-    #remove pet from pet shop
-    remove_pet_by_name(pet_shop, pet)
-
-   
-
-    # #take_cash
-    # if successful_sale == true
-    #     amount_to_take = pet[:price]
-    # remove_customer_cash(customer, amount_to_take)
-    # else 
-    #     return successful_sale = false
-    # end
-    
-    # if successful_sale == true
-    # remove_customer_cash(customer, pet[:price])
-    # p "pet[:price]) #{pet[:price]}"
-    # else
-    #     return successful_sale = false
-    # end
-
-    #add to cash register
-    # add_or_remove_cash(pet_shop, pet[:price])
-        
-
-
-
+ 
 
     return successful_sale
 end
