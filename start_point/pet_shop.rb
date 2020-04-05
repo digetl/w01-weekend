@@ -77,7 +77,6 @@ end
 #     for pets in customer #for every pet the customer has
 #         customer_pet_list += customer[:pets].count #Add to the count
 #     end
-
 #     return customer_pet_list #return the count
 # end
 
@@ -90,7 +89,6 @@ def customer_can_afford_pet(customer,new_pet_to_buy)
         return false
         
     elsif customer[:cash] >= new_pet_to_buy[:price]
-        
         return true
     else
         return false
@@ -98,21 +96,97 @@ def customer_can_afford_pet(customer,new_pet_to_buy)
 end
 
 def sell_pet_to_customer(pet_shop, pet, customer)
+    #set default to fail
+    successful_sale = true
+
     #check status before purchase
     customer_pet_count_presale = customer_pet_count(customer)
-    p "Customer has: #{customer_pet_count_presale} pets"
-    successful_sale = false
-    #check if customer can afford pet
-    if customer_can_afford_pet(customer,pet)
+
+    # check if pet exits
+    if find_pet_by_name(pet_shop, pet) != pet
+        successful_sale = false
+        p "no pet"
+        return
+    else
         successful_sale = true
+        p "pet found"
+    end
+    
+    if successful_sale == false
+        "no pet - so decline"
+        return false
+    end
+
+            
+    # check if customer can afford pet
+    
+    can_buy_pet = customer_can_afford_pet(customer, @new_pet)
+
+    if can_buy_pet == true
+        p "Yup - can afford"
     else
         successful_sale = false
     end
 
-    #check pet was added to customers pet list
-    
-    if customer_pet_count(customer)
+
+    if successful_sale == false
+        return false
     end
+
+    #add pet to customers list
+    if can_buy_pet && successful_sale == true
+    add_pet_to_customer(customer, pet)
+
+     #increment pets sold
+     if successful_sale == true
+        pets_sold = 1
+        increase_pets_sold(pet_shop, pets_sold)
+        return successful_sale = true
+        else
+            return successful_sale = false
+        end
+
+    else
+    return successful_sale = false
+    end
+
+    if successful_sale == false
+        return false
+    end
+
+    #check customer pet list
+    p "Customer has: #{customer_pet_count(customer)} pet(s) after sale"
+
+    if customer_pet_count(customer) == customer_pet_count_presale
+        successful_sale = false
+        return
+    else 
+        successful_sale = true
+    end
+
+    #remove pet from pet shop
+    remove_pet_by_name(pet_shop, pet)
+
+   
+
+    #take_cash
+    if successful_sale == true
+        amount_to_take = pet[:price]
+    remove_customer_cash(customer, amount_to_take)
+    else 
+        return successful_sale = false
+    end
+    
+    if successful_sale == true
+    remove_customer_cash(customer, pet[:price])
+    p "pet[:price]) #{pet[:price]}"
+    else
+        return successful_sale = false
+    end
+
+    #add to cash register
+    add_or_remove_cash(pet_shop, pet[:price])
+        
 
 
 
