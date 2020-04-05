@@ -85,7 +85,7 @@ def add_pet_to_customer(customer, pet)
 end
 
 def customer_can_afford_pet(customer,new_pet_to_buy)
-    if customer == nil 
+    if customer == 0 
         return false
         
     elsif customer[:cash] >= new_pet_to_buy[:price]
@@ -103,13 +103,14 @@ def sell_pet_to_customer(pet_shop, pet, customer)
     customer_pet_count_presale = customer_pet_count(customer)
 
     # check if pet exits
-    if find_pet_by_name(pet_shop, pet) != pet
+    if find_pet_by_name(pet_shop, pet) == pet
         successful_sale = false
-        p "no pet"
-        return
+        p "pet found"
+        
     else
         successful_sale = true
-        p "pet found"
+        
+        p "no pet"
     end
     
     if successful_sale == false
